@@ -1,47 +1,47 @@
 {
- "name": "node-red-contrib-velux",
- "version": "1.0.0",
- "description": "Node-RED nodes for the Velux KLF-200 io-homecontrol gateway. Maintained fork of PLCHome/node-red-contrib-velux with vendored velux-klf200 + velux-klf200-api, TLS fingerprint pinning (survives the 2026-07-12 factory cert expiry) and crash fixes.",
- "license": "MIT",
- "dependencies": {
-  "debug": "^4.3.1",
-  "safe-buffer": "^5.2.1"
- },
- "repository": {
-  "type": "git",
-  "url": "https://github.com/tix0815/node-red-contrib-velux.git"
- },
- "keywords": [
-  "node-red",
-  "velux",
-  "klf",
-  "klf200",
-  "klf-200",
-  "io-homecontrol",
-  "gateway",
-  "api"
- ],
- "node-red": {
-  "nodes": {
-   "velux-connection": "velux-connection.js",
-   "velux-nodes": "velux-nodes.js",
-   "velux-api": "velux-api.js",
-   "velux-scenes": "velux-scenes.js"
+  "name": "node-red-contrib-velux",
+  "version": "1.0.0",
+  "description": "Node-RED nodes for the Velux KLF-200 io-homecontrol gateway. Maintained fork of PLCHome/node-red-contrib-velux with vendored velux-klf200 + velux-klf200-api, TLS fingerprint pinning (survives the 2026-07-12 factory cert expiry) and crash fixes.",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.3.1",
+    "safe-buffer": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tix0815/node-red-contrib-velux.git"
+  },
+  "keywords": [
+    "node-red",
+    "velux",
+    "klf",
+    "klf200",
+    "klf-200",
+    "io-homecontrol",
+    "gateway",
+    "api"
+  ],
+  "node-red": {
+    "nodes": {
+      "velux-connection": "velux-connection.js",
+      "velux-nodes": "velux-nodes.js",
+      "velux-api": "velux-api.js",
+      "velux-scenes": "velux-scenes.js"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "author": {
+    "name": "tix0815 (fork)",
+    "url": "https://github.com/tix0815"
+  },
+  "contributors": [
+    {
+      "name": "Chris Traeger (original author, PLCHome)"
+    }
+  ],
+  "scripts": {
+    "test": "node test/load.test.js && node test/tls-pin.test.js && node test/leak.test.js"
   }
- },
- "engines": {
-  "node": ">=18"
- },
- "author": {
-  "name": "tix0815 (fork)",
-  "url": "https://github.com/tix0815"
- },
- "contributors": [
-  {
-   "name": "Chris Traeger (original author, PLCHome)"
-  }
- ],
- "scripts": {
-  "test": "node test/load.test.js && node test/tls-pin.test.js"
- }
 }
