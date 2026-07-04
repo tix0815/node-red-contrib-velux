@@ -1,0 +1,18 @@
+{
+  "velux-connection": {
+      "label": {
+          "host": "Host",
+          "password": "Password",
+          "monitor": "Monitoring"
+      },
+      "placeholder": {
+          "host": "for example: 192.168.2.15",
+          "password": "the WLAN Password",
+          "monitor": "please select the monitoring method"
+      },
+      "monitor": {
+        "MONITOR" : "use home monitor",
+        "NOMONITOR" : "no data from KLF"
+      } 
+  }
+}
