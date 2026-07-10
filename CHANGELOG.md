@@ -1,8 +1,22 @@
-# 1.0.0 (fork, 2026-07-05)
-* vendored velux-klf200 0.0.8 + velux-klf200-api 0.1.7 into lib/ (single package)
-* TLS: fingerprint pinning replaces chain validation (factory cert expires 2026-07-12)
-* fix: sendValue unhandled rejection crashed Node-RED on CFM timeout
-* fix: connection errors are now catchable (two-arg node.error)
+# 1.0.0 (maintained fork, 2026-07-05)
+
+Fork of PLCHome/node-red-contrib-velux 0.0.8. Same package name and node types —
+drop-in replacement.
+
+* vendored `velux-klf200` 0.0.8 + `velux-klf200-api` 0.1.7 into `lib/` (single
+  self-contained package; release tarball bundles npm deps for offline install)
+* **fix 1 — TLS fingerprint pinning** replaces chain validation, so connections keep
+  working after the bundled factory certificate expires on 2026-07-12
+  (`options.fingerprint` override; `options.old` accept-any path preserved)
+* **fix 2 — process crash**: `sendValue` discarded its promise; a 5 s command-confirm
+  timeout became an unhandled rejection that killed Node-RED on Node ≥ 15
+* **fix 3 — catchable errors**: connection errors now use two-arg `node.error()`
+  (visible to `catch` nodes / dashboards)
+* **fix 4 — listener leak**: `getVelux` cleared no listeners; the 5 s reconnect loop
+  leaked ~14 EventEmitter listeners per attempt during a gateway outage
+* **fix 5 — no secret in logs**: KLF-200 password is no longer printed in debug output
+* tests: `npm test` (module load, TLS pin match/mismatch/legacy, listener-leak
+  regression); verified in real Node-RED 5.0.1 / Node.js 24
 
 ### 0.0.7: Maintenance Release
 
