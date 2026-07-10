@@ -65,14 +65,6 @@ npm install node-red-contrib-velux-klf200
 # then restart Node-RED
 ```
 
-> **Install into the right directory.** Node-RED loads palette modules from its
-> *userDir* (`~/.node-red`, or `/data` in the Docker image), which takes precedence
-> over the application directory. Installing elsewhere silently has no effect. Verify:
-> ```bash
-> find / -path '*node-red-contrib-velux/package.json' 2>/dev/null -exec grep -H '"version"' {} \;
-> ```
-> The copy under your userDir must read `1.0.0` after install + restart.
-
 ## Compatibility
 
 Tested on **Node-RED 5.0.1 / Node.js 24** (and the 4.x line). Requires Node ≥ 18.
