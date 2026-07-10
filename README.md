@@ -1,12 +1,14 @@
-# node-red-contrib-velux (maintained fork)
+# node-red-contrib-velux-klf200
 
 Node-RED nodes for the **Velux KLF-200** io-homecontrol® gateway.
 
 A drop-in, maintained fork of [PLCHome/node-red-contrib-velux](https://github.com/PLCHome/node-red-contrib-velux)
-(unmaintained since 2021). The transport libraries `velux-klf200` and `velux-klf200-api`
-are **vendored** into `lib/` — one self-contained package instead of a three-package
-dependency chain. Node types are unchanged (`velux-connection`, `Velux Nodes`,
-`Velux Api`, `Velux Scenes`), so **existing flows keep working without any change**.
+(unmaintained since 2021), published under a new npm name because the original name is
+taken. The transport libraries `velux-klf200` and `velux-klf200-api` are **vendored**
+into `lib/` — one self-contained package instead of a three-package dependency chain.
+The node types are **identical** to upstream (`velux-connection`, `Velux Nodes`,
+`Velux Api`, `Velux Scenes`), so **existing flows keep working without any change** after
+migrating.
 
 > ## ⚠️ If you use the KLF-200 nodes, read this
 > The Velux **factory TLS certificate bundled in the upstream package expires on
@@ -38,21 +40,40 @@ dependency chain. Node types are unchanged (`velux-connection`, `Velux Nodes`,
 
 ## Install
 
-Via the Node-RED editor: **Manage palette → Install → upload** the `.tgz` from the
-[latest release](https://github.com/tix0815/node-red-contrib-velux/releases/latest),
-then restart Node-RED.
-
-Or from a shell **in your Node-RED user directory** (this matters — see note):
+From npm — **Manage palette → Install → search `velux-klf200`**, or:
 
 ```bash
-cd ~/.node-red   # or /data in the official Docker image — your *userDir*, not the app dir
-npm install https://github.com/tix0815/node-red-contrib-velux/releases/latest/download/node-red-contrib-velux-1.0.0.tgz
+cd ~/.node-red     # or /data in the official Docker image — your *userDir*, not the app dir
+npm install node-red-contrib-velux-klf200
 # then restart Node-RED
 ```
 
-npm removes the old registry version automatically (same package name, higher version).
-The release tarball **bundles its dependencies**, so the install needs no npm-registry
-access.
+Offline / from the release tarball (bundles its dependencies, no registry access needed):
+
+```bash
+cd ~/.node-red
+npm install https://github.com/tix0815/node-red-contrib-velux/releases/latest/download/node-red-contrib-velux-klf200-1.0.1.tgz
+```
+
+### Migrating from the original `node-red-contrib-velux`
+
+Both packages register the **same node types**, and Node-RED won't load two modules
+that provide the same type — so remove the old one first, then add this one. Your
+flows are untouched (they reference the type names, which are identical):
+
+```bash
+cd ~/.node-red
+npm remove node-red-contrib-velux
+npm install node-red-contrib-velux-klf200
+# then restart Node-RED
+```
+
+> **Install into the right directory.** Node-RED loads palette modules from its
+> *userDir* (`~/.node-red`, or `/data` in the Docker image), which takes precedence
+> over the application directory. Installing elsewhere silently has no effect. Verify:
+> ```bash
+> find / -path '*velux*/package.json' 2>/dev/null -exec grep -H '"name"\|"version"' {} \;
+> ```
 
 > **Install into the right directory.** Node-RED loads palette modules from its
 > *userDir* (`~/.node-red`, or `/data` in the Docker image), which takes precedence

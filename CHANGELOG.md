@@ -1,7 +1,13 @@
+# 1.0.1 (2026-07-10)
+
+* published to npm as **`node-red-contrib-velux-klf200`** (the original name is taken;
+  node types are unchanged, so migration is remove-old + install-new)
+* docs: README lists all five fixes, adds an "am I affected?" cert check, a migration
+  note, and the userDir install caveat
+
 # 1.0.0 (maintained fork, 2026-07-05)
 
-Fork of PLCHome/node-red-contrib-velux 0.0.8. Same package name and node types —
-drop-in replacement.
+Fork of PLCHome/node-red-contrib-velux 0.0.8. Same node types — drop-in replacement.
 
 * vendored `velux-klf200` 0.0.8 + `velux-klf200-api` 0.1.7 into `lib/` (single
   self-contained package; release tarball bundles npm deps for offline install)

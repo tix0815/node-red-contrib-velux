@@ -1,6 +1,6 @@
 {
-  "name": "node-red-contrib-velux",
-  "version": "1.0.0",
+  "name": "node-red-contrib-velux-klf200",
+  "version": "1.0.1",
   "description": "Node-RED nodes for the Velux KLF-200 io-homecontrol gateway. Maintained fork of PLCHome/node-red-contrib-velux with vendored velux-klf200 + velux-klf200-api, TLS fingerprint pinning (survives the 2026-07-12 factory cert expiry) and crash fixes.",
   "license": "MIT",
   "dependencies": {
@@ -19,7 +19,8 @@
     "klf-200",
     "io-homecontrol",
     "gateway",
-    "api"
+    "rollershutter",
+    "fork"
   ],
   "node-red": {
     "nodes": {
@@ -64,5 +65,9 @@
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
-  ]
+  ],
+  "homepage": "https://github.com/tix0815/node-red-contrib-velux#readme",
+  "bugs": {
+    "url": "https://github.com/tix0815/node-red-contrib-velux/issues"
+  }
 }
