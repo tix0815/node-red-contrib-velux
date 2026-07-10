@@ -43,15 +43,13 @@ migrating.
 From npm — **Manage palette → Install → search `velux-klf200`**, or:
 
 ```bash
-cd ~/.node-red     # or /data in the official Docker image — your *userDir*, not the app dir
-npm install node-red-contrib-velux-klf200
+npm install node-red-contrib-velux-klf200   # in your Node-RED user directory
 # then restart Node-RED
 ```
 
 Offline / from the release tarball (bundles its dependencies, no registry access needed):
 
 ```bash
-cd ~/.node-red
 npm install https://github.com/tix0815/node-red-contrib-velux/releases/latest/download/node-red-contrib-velux-klf200-1.0.1.tgz
 ```
 
@@ -62,18 +60,10 @@ that provide the same type — so remove the old one first, then add this one. Y
 flows are untouched (they reference the type names, which are identical):
 
 ```bash
-cd ~/.node-red
 npm remove node-red-contrib-velux
 npm install node-red-contrib-velux-klf200
 # then restart Node-RED
 ```
-
-> **Install into the right directory.** Node-RED loads palette modules from its
-> *userDir* (`~/.node-red`, or `/data` in the Docker image), which takes precedence
-> over the application directory. Installing elsewhere silently has no effect. Verify:
-> ```bash
-> find / -path '*velux*/package.json' 2>/dev/null -exec grep -H '"name"\|"version"' {} \;
-> ```
 
 > **Install into the right directory.** Node-RED loads palette modules from its
 > *userDir* (`~/.node-red`, or `/data` in the Docker image), which takes precedence

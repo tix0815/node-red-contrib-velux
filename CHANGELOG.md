@@ -2,8 +2,8 @@
 
 * published to npm as **`node-red-contrib-velux-klf200`** (the original name is taken;
   node types are unchanged, so migration is remove-old + install-new)
-* docs: README lists all five fixes, adds an "am I affected?" cert check, a migration
-  note, and the userDir install caveat
+* docs: README lists all five fixes, adds an "am I affected?" cert check and a
+  migration note
 
 # 1.0.0 (maintained fork, 2026-07-05)
 
