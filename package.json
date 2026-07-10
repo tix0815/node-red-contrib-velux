@@ -43,5 +43,26 @@
   ],
   "scripts": {
     "test": "node test/load.test.js && node test/tls-pin.test.js && node test/leak.test.js"
-  }
+  },
+  "bundleDependencies": [
+    "debug",
+    "ms",
+    "safe-buffer"
+  ],
+  "files": [
+    "velux-connection.js",
+    "velux-connection.html",
+    "velux-nodes.js",
+    "velux-nodes.html",
+    "velux-api.js",
+    "velux-api.html",
+    "velux-scenes.js",
+    "velux-scenes.html",
+    "lib/",
+    "icons/",
+    "locales/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
 }
