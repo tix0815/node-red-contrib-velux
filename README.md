@@ -68,6 +68,30 @@ npm install node-red-contrib-velux-klf200
 ## Compatibility
 
 Tested on **Node-RED 5.0.1 / Node.js 24** (and the 4.x line). Requires Node ≥ 18.
+Minimum declared Node-RED version: **3.0.0**.
+
+> **On the flow-library scorecard warning “Nodes have unique names”:** this package
+> deliberately registers the *same* four node types as upstream
+> `node-red-contrib-velux` (`velux-connection`, `Velux Nodes`, `Velux Api`,
+> `Velux Scenes`). That is exactly what makes it a drop-in replacement — existing
+> flows keep working untouched after migrating. Renaming the types to clear the
+> warning would break every existing user's flow, so the warning is accepted on
+> purpose. As a consequence the two packages **cannot be installed side by side**:
+> remove `node-red-contrib-velux` first.
+
+## Examples
+
+Ready-made flows ship with the package. In the Node-RED editor use
+**☰ → Import → Examples → node-red-contrib-velux-klf200**:
+
+| Example | Shows |
+| --- | --- |
+| Blind position | Move a product with `velux:write`, read it back with `velux:load` |
+| Scene | Run a KLF-200 scene with `velux:execute`, incl. the `SILENT` velocity |
+| API and events | A raw API request, plus live position-change notifications (`529`) that also catch movements made with io-homecontrol hand-held remotes |
+
+Each example ships with an empty connection config — enter your gateway's IP and
+password once after importing.
 
 ## Configuration
 

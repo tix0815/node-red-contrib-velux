@@ -1,0 +1,102 @@
+[
+    {
+        "id": "velux_ex1_comment",
+        "type": "comment",
+        "name": "Setup: open the 'klf200' config node and enter your KLF-200 IP + password",
+        "info": "This example drives a single roller shutter / blind.\n\n**Moving the product**\n- `msg.topic = \"velux:write\"` with a numeric `msg.payload` (0-100) moves it.\n  0 = fully open, 100 = fully closed.\n\n**Getting the position**\n- `msg.topic = \"velux:load\"` asks the *gateway* for the current position\n  (issues GW_GET_NODE_INFORMATION_REQ) and emits the fresh answer.\n- `msg.topic = \"velux:read\"` emits the *cached* value the node already holds,\n  without talking to the gateway.\n\nThe answer leaves the node's output; which field is emitted is set by the node's\n`nodevalue` property (here: the current position).\n\n**About `index`:** this is the node ID the KLF-200 reports for the product in its\nsystem table - not a position in the web UI's alphabetical list. Pick it from the\ndropdown in the node's edit dialog, which reads the live list from your gateway.\n",
+        "x": 340,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "velux_ex1_open",
+        "type": "inject",
+        "name": "Open (0%)",
+        "props": [
+            { "p": "payload" },
+            { "p": "topic", "vt": "str" }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "velux:write",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 180,
+        "y": 140,
+        "wires": [["velux_ex1_blind"]]
+    },
+    {
+        "id": "velux_ex1_close",
+        "type": "inject",
+        "name": "Close (100%)",
+        "props": [
+            { "p": "payload" },
+            { "p": "topic", "vt": "str" }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "velux:write",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 180,
+        "y": 200,
+        "wires": [["velux_ex1_blind"]]
+    },
+    {
+        "id": "velux_ex1_read",
+        "type": "inject",
+        "name": "Read position from gateway",
+        "props": [
+            { "p": "topic", "vt": "str" }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "velux:load",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 260,
+        "wires": [["velux_ex1_blind"]]
+    },
+    {
+        "id": "velux_ex1_blind",
+        "type": "Velux Nodes",
+        "name": "Living room blind",
+        "datasource": "velux_ex1_connection",
+        "index": "0",
+        "nodevalue": "CURRENTPOSITION",
+        "topic": "",
+        "x": 460,
+        "y": 200,
+        "wires": [["velux_ex1_debug"]]
+    },
+    {
+        "id": "velux_ex1_debug",
+        "type": "debug",
+        "name": "position",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "velux_ex1_connection",
+        "type": "velux-connection",
+        "host": "",
+        "password": "",
+        "monitor": "MONITOR"
+    }
+]

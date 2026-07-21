@@ -1,3 +1,14 @@
+# 1.0.2 (2026-07-18)
+
+Flow-library scorecard fixes — no runtime/behaviour change.
+
+* **example flows** added under `examples/` (importable via the editor's
+  *Import → Examples* menu), one per node type: blind position control
+  (`Velux Nodes`), running a scene (`Velux Scenes`), and raw API requests plus
+  live position-change notifications (`Velux Api`)
+* `examples/` added to the published `files` allowlist so they ship in the tarball
+* declared the **minimum supported Node-RED version** (`node-red.version: ">=3.0.0"`)
+
 # 1.0.1 (2026-07-10)
 
 * published to npm as **`node-red-contrib-velux-klf200`** (the original name is taken;

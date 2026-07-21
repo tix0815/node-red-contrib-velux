@@ -1,0 +1,82 @@
+[
+    {
+        "id": "velux_ex2_comment",
+        "type": "comment",
+        "name": "Run a scene that was defined in the KLF-200 web UI",
+        "info": "Scenes are created in the KLF-200 web interface. This node triggers one of them.\n\n- `msg.topic = \"velux:execute\"` runs the scene selected in the node's `index`.\n- `msg.topic = \"velux:execute:id:3\"` overrides the scene index for this message.\n- `msg.topic = \"velux:execute:velocity:SILENT\"` overrides the velocity\n  (DEFAULT | SILENT | FAST).\n\nWhile the scene runs, the node status shows the remaining time reported by the\ngateway, and progress notifications leave the node's output.\n",
+        "x": 320,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "velux_ex2_run",
+        "type": "inject",
+        "name": "Run scene",
+        "props": [
+            { "p": "topic", "vt": "str" }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "velux:execute",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 140,
+        "wires": [["velux_ex2_scene"]]
+    },
+    {
+        "id": "velux_ex2_run_silent",
+        "type": "inject",
+        "name": "Run scene (silent)",
+        "props": [
+            { "p": "topic", "vt": "str" }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "velux:execute:velocity:SILENT",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 200,
+        "wires": [["velux_ex2_scene"]]
+    },
+    {
+        "id": "velux_ex2_scene",
+        "type": "Velux Scenes",
+        "name": "Good morning",
+        "datasource": "velux_ex2_connection",
+        "index": "0",
+        "velocity": "DEFAULT",
+        "topic": "",
+        "x": 440,
+        "y": 170,
+        "wires": [["velux_ex2_debug"]]
+    },
+    {
+        "id": "velux_ex2_debug",
+        "type": "debug",
+        "name": "scene progress",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 170,
+        "wires": []
+    },
+    {
+        "id": "velux_ex2_connection",
+        "type": "velux-connection",
+        "host": "",
+        "password": "",
+        "monitor": "MONITOR"
+    }
+]

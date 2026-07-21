@@ -1,0 +1,92 @@
+[
+    {
+        "id": "velux_ex3_comment",
+        "type": "comment",
+        "name": "Raw KLF-200 API: send a request, and listen for live notifications",
+        "info": "The Velux Api node has two independent uses:\n\n**1. Request / response** - send a message in to call an API command. The command\nis taken from `msg.payload.api` (numeric) or `msg.payload.apiText` (name); if the\npayload carries neither, the command configured on the node is used. The gateway's\nanswer leaves the node's output.\n\n**2. Notifications** - select one or more notification types in the `ntf` list and\nthe node emits every matching frame the gateway pushes, without any input.\n`529` (0x0211) is `GW_NODE_STATE_POSITION_CHANGED_NTF`, which fires whenever a\nproduct moves - including movements triggered by io-homecontrol hand-held remotes.\n\nNote: notifications are only pushed when the connection node has the house status\nmonitor enabled (`monitor: MONITOR`).\n\nThe lower node is notification-only - it has no input wire, so its selected command\nis never sent. A command still has to be selected because the field is mandatory.\n",
+        "x": 380,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "velux_ex3_req_inject",
+        "type": "inject",
+        "name": "Ask gateway for its state",
+        "props": [
+            { "p": "payload" }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 200,
+        "y": 140,
+        "wires": [["velux_ex3_api_req"]]
+    },
+    {
+        "id": "velux_ex3_api_req",
+        "type": "Velux Api",
+        "name": "GW_GET_STATE_REQ",
+        "datasource": "velux_ex3_connection",
+        "api": "12",
+        "ntf": [],
+        "topic": "",
+        "x": 480,
+        "y": 140,
+        "wires": [["velux_ex3_req_debug"]]
+    },
+    {
+        "id": "velux_ex3_req_debug",
+        "type": "debug",
+        "name": "gateway state",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "velux_ex3_api_ntf",
+        "type": "Velux Api",
+        "name": "Position change events",
+        "datasource": "velux_ex3_connection",
+        "api": "12",
+        "ntf": ["529"],
+        "topic": "",
+        "x": 480,
+        "y": 240,
+        "wires": [["velux_ex3_ntf_debug"]]
+    },
+    {
+        "id": "velux_ex3_ntf_debug",
+        "type": "debug",
+        "name": "product moved",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "velux_ex3_connection",
+        "type": "velux-connection",
+        "host": "",
+        "password": "",
+        "monitor": "MONITOR"
+    }
+]
